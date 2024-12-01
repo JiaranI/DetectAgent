@@ -1,0 +1,7 @@
+openai
+torch
+langchain
+flask
+langchain_community
+sentence-transformers
+flask_cors

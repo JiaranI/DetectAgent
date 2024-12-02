@@ -15,7 +15,7 @@ conda activate DetectAgent
 ### 安装依赖
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 
 ### 开启服务

@@ -60,6 +60,12 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
+        #loading {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -68,6 +74,7 @@
         <label for="inputCode">请输入待检测的代码：</label>
         <textarea id="inputCode" placeholder="在此处输入待检测的代码语句..."></textarea>
         <button onclick="fixCode()">执行异常检测</button>
+        <div id="loading">请稍等......</div>
         <label for="fixedCode">检测结果：</label>
         <textarea id="fixedCode" readonly placeholder="检测结果"></textarea>
     </div>
@@ -75,6 +82,10 @@
     <script>
         async function fixCode() {
             const inputCode = document.getElementById('inputCode').value;
+
+            // 显示加载提示
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('fixedCode').value = ''; // 清空之前的结果
 
             // 发送POST请求到后端
             const response = await fetch('http://82.156.118.211:1038/echo', {
@@ -87,9 +98,13 @@
 
             if (response.ok) {
                 const result = await response.json();
+                // 隐藏加载提示
+                document.getElementById('loading').style.display = 'none';
                 // 显示修复后的代码
                 document.getElementById('fixedCode').value = result.echo;
             } else {
+                // 隐藏加载提示
+                document.getElementById('loading').style.display = 'none';
                 alert("请求失败！");
             }
         }
